@@ -1,6 +1,6 @@
 # SSL-Tracker
 
-SSL Tracker for internal and external sites.
+SSL Tracker for internal and external sites. As Let's encrypt will be stopping the alert emails for ssl expiry.
 
 ---
 
