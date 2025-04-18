@@ -1,0 +1,58 @@
+[
+    {
+        "url": "easternenterprise.com",
+        "email": "itsupport@easternenterprise.com",
+        "category": "Production",
+        "days_left": 61,
+        "expiry_date": "2025-06-18"
+    },
+    {
+        "url": "smartbooqing.com",
+        "email": "itsupport@easternenterprise.com",
+        "category": "Production",
+        "days_left": 32,
+        "expiry_date": "2025-05-20"
+    },
+    {
+        "url": "peppoltest.bluzor.com",
+        "email": "itsupport@easternenterprise.com",
+        "category": "Stage",
+        "days_left": 80,
+        "expiry_date": "2025-07-08"
+    },
+    {
+        "url": "peppol.bluzor.com",
+        "email": "itsupport@easternenterprise.com",
+        "category": "Production",
+        "days_left": 189,
+        "expiry_date": "2025-10-25"
+    },
+    {
+        "url": "mail.smartubl.nl",
+        "email": "itsupport@easternenterprise.com",
+        "category": "Development",
+        "days_left": 59,
+        "expiry_date": "2025-06-16"
+    },
+    {
+        "url": "passwordreset.smartbooqing.nl",
+        "email": "itsupport@easternenterprise.com",
+        "category": "Internal",
+        "days_left": 17,
+        "expiry_date": "2025-05-05"
+    },
+    {
+        "url": "dev-feedback.smartbooqing.nl",
+        "email": "itsupport@easternenterprise.com",
+        "category": "Development",
+        "days_left": -1,
+        "expiry_date": "Error"
+    },
+    {
+        "url": "git.easternenterprise.com:5050",
+        "email": "itsupport@easternenterprise.com",
+        "category": "Development",
+        "days_left": 55,
+        "expiry_date": "2025-06-13"
+    }
+]

@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  ssl-tracker:
+    image: github.com/shaktit67/ssl-tracker
+    container_name: ssl-tracker
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./custom_hosts:/app/custom_hosts
+      - ./websites.json:/app/websites.json
+    restart: unless-stopped
+    env_file:
+      - .env
