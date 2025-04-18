@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SSL Tracker Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      background-color: white;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #34495e;
+      color: white;
+    }
+    .notification-container {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+    .notification-bar {
+      width: 10px;
+      height: 30px;
+      border-radius: 4px;
+      background-color: #2ecc71;
+      box-shadow: 0 0 10px rgba(46, 204, 113, 0.8);
+    }
+    .sent {
+      background-color: #e74c3c;
+      box-shadow: 0 0 10px rgba(231, 76, 60, 0.8);
+    }
+    .remove-btn {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>SSL Tracker Dashboard</h2>
+
+  <!-- Category Filter -->
+  <form method="get" style="margin-bottom: 20px;">
+    <label for="category">Filter by Category:</label>
+    <select name="category" onchange="this.form.submit()">
+      <option value="All" {% if selected_category == 'All' %}selected{% endif %}>All</option>
+      {% for cat in categories %}
+        <option value="{{ cat }}" {% if selected_category == cat %}selected{% endif %}>{{ cat }}</option>
+      {% endfor %}
+    </select>
+  </form>
+
+  <!-- Add New Website -->
+  <form method="post">
+    <input type="text" name="url" placeholder="Website URL" required>
+    <input type="email" name="email" placeholder="Notification Email" required>
+    <select name="category" required>
+      <option value="" disabled selected>Select Category</option>
+      {% for cat in categories %}
+        <option value="{{ cat }}">{{ cat }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Add Website</button>
+  </form>
+
+  <!-- Website Table -->
+  <table>
+    <tr>
+      <th>Website</th>
+      <th>Email</th>
+      <th>Category</th>
+      <th>Days Left</th>
+      <th>Expiration Date</th>
+      <th>Notifications</th>
+      <th>Action</th>
+    </tr>
+    {% for site in websites %}
+    <tr>
+      <td>{{ site.url }}</td>
+      <td>{{ site.email }}</td>
+      <td>{{ site.category }}</td>
+      <td>{{ site.days_left if site.days_left != -1 else "Error" }}</td>
+      <td>{{ site.expiry_date }}</td>
+      <td>
+        <div class="notification-container">
+          {% if site.days_left != -1 and site.days_left|int >= 0 %}
+            <div class="notification-bar {% if site.days_left|int <= 30 %}sent{% endif %}"></div>
+            <div class="notification-bar {% if site.days_left|int <= 15 %}sent{% endif %}"></div>
+            <div class="notification-bar {% if site.days_left|int <= 10 %}sent{% endif %}"></div>
+            <div class="notification-bar {% if site.days_left|int <= 5 %}sent{% endif %}"></div>
+          {% else %}
+            <span style="color:red;font-size:12px;">Error Checking SSL</span>
+          {% endif %}
+        </div>
+      </td>
+      <td>
+        <form action="{{ url_for('remove_website', url=site.url) }}" method="post" style="display:inline;">
+          <button class="remove-btn" onclick="return confirm('Are you sure you want to remove {{ site.url }}?');">Remove</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
